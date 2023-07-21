@@ -7,12 +7,18 @@ export const dateConverter = (
   switch (type) {
     case "dec":
       if (typeof date !== "string") {
-        const dmonth = date.getMonth();
-        const dday = date.getDate();
-        const date_part = `${date.getFullYear()}-${
+        const ddate = new Date(date.setMinutes(date.getTimezoneOffset()));
+        const dmonth = ddate.getMonth() + 1;
+        const dday = ddate.getDate();
+        const dhour = ddate.getHours();
+        const dminute = ddate.getMinutes();
+        const dsecond = ddate.getSeconds();
+        const date_part = `${ddate.getFullYear()}-${
           dmonth < 10 ? `0${dmonth}` : dmonth
         }-${dday < 10 ? `0${dday}` : dday}`;
-        const time_part = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.000Z`;
+        const time_part = `${dhour < 10 ? `0${dhour}` : dhour}:${
+          dminute < 10 ? `0${dminute}` : dminute
+        }:${dsecond < 10 ? `0${dsecond}` : dsecond}.000Z`;
         return date_type === "datetime"
           ? `${date_part}T${time_part}`
           : date_type === "date"
