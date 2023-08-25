@@ -7,7 +7,7 @@ export const dateConverter = (
   switch (type) {
     case "dec":
       if (typeof date !== "string") {
-        const ddate = new Date(date.setMinutes(date.getTimezoneOffset()));
+        const ddate = date; //new Date(date.setMinutes(date.getTimezoneOffset()));
         const dmonth = ddate.getMonth() + 1;
         const dday = ddate.getDate();
         const dhour = ddate.getHours();
