@@ -48,7 +48,7 @@ export const dateConverter = (
             ? date
             : `2020-01-01T${date}.000Z`;
         const pdate = new Date(rdate);
-        const dmonth = pdate.getMonth();
+        const dmonth = pdate.getMonth() + 1;
         const dday = pdate.getDate();
         const dhour = pdate.getHours();
         const dminute = pdate.getMinutes();
