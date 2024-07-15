@@ -5,3 +5,8 @@ export declare const translateForm: ({ allUp, children, translate, lang, }: {
     translate: Array<any>;
     lang: string;
 }) => string;
+export declare const formValidation: (props: {
+    trans: Function;
+    fields: any[];
+    data: any;
+}) => void;
