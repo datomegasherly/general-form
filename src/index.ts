@@ -131,6 +131,11 @@ export const formValidation = (props: {
   }
   fields.map((field) => {
     const currentData = data[field.name];
+    if (field.required && !currentData) {
+      throw `${trans(field.title, { firstUp: true })} ${trans("is required", {
+        firstUp: true,
+      })}`;
+    }
     if (typeof currentData === "string") {
       if (
         field.minLength &&
@@ -151,11 +156,6 @@ export const formValidation = (props: {
           "length is more than",
           { firstUp: true }
         )} ${field.maxLength}`;
-      }
-      if (field.required && !currentData) {
-        throw `${trans(field.title, { firstUp: true })} ${trans("is required", {
-          firstUp: true,
-        })}`;
       }
     } else if (typeof currentData === "number") {
       if (field.minLength && currentData < field.minLength) {
