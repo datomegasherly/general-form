@@ -132,9 +132,18 @@ export const formValidation = (props: {
   fields.map((field) => {
     const currentData = data[field.name];
     if (field.required && !currentData) {
-      throw `${trans(field.title, { firstUp: true })} ${trans("is required", {
-        firstUp: true,
-      })}`;
+      if (field.type === "boolean" && currentData === false) {
+        // do nothing
+      } else if (
+        ["integer", "float"].indexOf(field.type) >= 0 &&
+        currentData === 0
+      ) {
+        // do nothing
+      } else {
+        throw `${trans(field.title, { firstUp: true })} ${trans("is required", {
+          firstUp: true,
+        })}`;
+      }
     }
     if (typeof currentData === "string") {
       if (
@@ -258,6 +267,7 @@ export const formValidation = (props: {
         });
         break;
       case "integer":
+      case "float":
       case "main-image":
         if (data.hasOwnProperty(field.name) && isNaN(Number(currentData))) {
           throw `${trans(field.title, { firstUp: true })} ${trans(
