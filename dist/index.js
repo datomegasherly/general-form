@@ -282,7 +282,9 @@ const formValidation = (props) => {
                     currentData?.files) {
                     const numberOfFields = currentData?.files?.length -
                         (currentData?.deleted ? currentData.deleted.length : 0);
-                    if (field.minFiles && numberOfFields < field.minFiles) {
+                    if (field.minFiles &&
+                        numberOfFields < field.minFiles &&
+                        (field.required || numberOfFields)) {
                         throw `${trans(field.title, { firstUp: true })} ${trans("length is less than", { firstUp: true })} ${field.minFiles}`;
                     }
                     if (field.maxFiles && numberOfFields > field.maxFiles) {
@@ -290,7 +292,9 @@ const formValidation = (props) => {
                     }
                 }
                 else if (currentData && Array.isArray(currentData)) {
-                    if (field.minFiles && currentData.length < field.minFiles) {
+                    if (field.minFiles &&
+                        currentData.length < field.minFiles &&
+                        (field.required || currentData.length)) {
                         throw `${trans(field.title, { firstUp: true })} ${trans("length is less than", { firstUp: true })} ${field.minFiles}`;
                     }
                     if (field.maxFiles && currentData.length > field.maxFiles) {
