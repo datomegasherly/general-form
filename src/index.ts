@@ -1,3 +1,5 @@
+import randexp from "randexp-ts";
+
 export const dateConverter = (
   date: string | Date,
   date_type: "datetime" | "date" | "time" = "datetime",
@@ -143,6 +145,20 @@ export const formValidation = (props: {
         throw `${trans(field.title, { firstUp: true })} ${trans("is required", {
           firstUp: true,
         })}`;
+      }
+    }
+    if (field.regex && currentData) {
+      const regex = new RegExp(field.regex);
+      debugger;
+      if (currentData.match(regex)) {
+        // do nothing
+      } else {
+        throw `${trans(field.title, { firstUp: true })} ${trans(
+          "should be like:",
+          {
+            firstUp: true,
+          }
+        )} ${randexp.randexp(field.regex)}`;
       }
     }
     if (typeof currentData === "string") {

@@ -14,5 +14,8 @@
   "types": "dist/index.d.ts",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "randexp-ts": "^1.0.5"
+  }
 }

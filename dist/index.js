@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.formValidation = exports.translateForm = exports.dateConverter = void 0;
+const randexp_ts_1 = __importDefault(require("randexp-ts"));
 const dateConverter = (date, date_type = "datetime", 
 /** enc: convert to Date , dec: convert to String */
 type = "dec") => {
@@ -114,6 +118,18 @@ const formValidation = (props) => {
                 throw `${trans(field.title, { firstUp: true })} ${trans("is required", {
                     firstUp: true,
                 })}`;
+            }
+        }
+        if (field.regex && currentData) {
+            const regex = new RegExp(field.regex);
+            debugger;
+            if (currentData.match(regex)) {
+                // do nothing
+            }
+            else {
+                throw `${trans(field.title, { firstUp: true })} ${trans("should be like:", {
+                    firstUp: true,
+                })} ${randexp_ts_1.default.randexp(field.regex)}`;
             }
         }
         if (typeof currentData === "string") {
