@@ -149,7 +149,6 @@ export const formValidation = (props: {
     }
     if (field.regex && currentData) {
       const regex = new RegExp(field.regex);
-      debugger;
       if (currentData.match(regex)) {
         // do nothing
       } else {
@@ -158,7 +157,7 @@ export const formValidation = (props: {
           {
             firstUp: true,
           }
-        )} ${randexp.randexp(field.regex)}`;
+        )} ${field.example ? field.example : randexp.randexp(field.regex)}`;
       }
     }
     if (typeof currentData === "string") {
